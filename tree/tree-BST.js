@@ -38,6 +38,64 @@ class BST {
     }
   }
 
+  //! home task in Tree ===========
+  Find(val, node = this.root) {
+    if (!node) {
+      return null;
+    } else if (val === node.val) {
+      return node;
+    } else if (val > node.val) {
+      return this.Find(val, node.right);
+    } else {
+      return this.Find(val, node.left);
+    }
+  }
+
+  Contain(val) {
+    return this.Find(val) ? true : false;
+  }
+
+  FindMin() {
+    let current = this.root;
+    if (!current) {
+      return null;
+    }
+
+    while (current.left) {
+      current = current.left;
+    }
+    return current;
+  }
+
+  FindMax() {
+    let current = this.root;
+    if (!current) {
+      return null;
+    }
+
+    while (current.right) {
+      current = current.right;
+    }
+    return current;
+  }
+
+  FindSecondMax() {
+    let current = this.root;
+    let secondCurrent = null;
+
+    if (!current || (!current.right && !current.left)) {
+      console.log(`There is no any tree second Max Value`);
+      return;
+    }
+
+    while (current.right) {
+      secondCurrent = current;
+      current = current.right;
+    }
+
+    return secondCurrent.val;
+  }
+
   log() {
     console.log(this.root);
   }
@@ -45,16 +103,13 @@ class BST {
 
 let tree = new BST();
 
-// tree.root = new Node(10);
-// tree.root.right = new Node(12);
-// tree.root.left = new Node(7);
-// tree.root.right.right = new Node(14);
-// tree.root.right.left = new Node(11);
-// tree.root.left.right = new Node(8);
-// tree.root.left.left = new Node(6);
-
 tree.Insert(10);
 tree.Insert(12);
 tree.Insert(7);
+tree.Insert(6);
+tree.Insert(8);
+tree.Insert(14);
+tree.Insert(11);
+tree.Insert(18);
 
 tree.log();
