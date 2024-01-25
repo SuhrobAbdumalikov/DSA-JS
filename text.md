@@ -13,3 +13,7 @@ dequeue => shift
 getFront => [0]
 isEmpty => 0
 size => length
+
+
+<!-- Tree -->
+
