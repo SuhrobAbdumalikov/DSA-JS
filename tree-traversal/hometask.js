@@ -38,37 +38,41 @@ class BST {
     }
   }
 
-  DFSPreOrder() {
-    var data = [];
-    function traverse(node) {
-      node.val && data.push(node.val);
-      node.left && traverse(node.left);
-      node.right && traverse(node.right);
+  DFSPreOrderWithLoop() {
+    let current = this.root;
+    let data = [];
+    let queue = [];
+
+    while (current || queue.length) {
+      if (current) {
+        data.push(current.val);
+        if (current.right) {
+          queue.push(current.right);
+        }
+        current = current.left;
+      } else {
+        current = queue.pop();
+      }
     }
-    traverse(this.root);
     return data;
   }
 
-  DFSPostOrder() {
+  DFSInOrderWithLoop() {
     var data = [];
+    var queue = [];
+    var current = this.root;
 
-    function traverse(node) {
-      node.left && traverse(node.left);
-      node.right && traverse(node.right);
-      data.push(node.val);
+    while (current || queue.length) {
+      if (current) {
+        queue.push(current);
+        current = current.left;
+      } else {
+        let node = queue.pop();
+        data.push(node.val);
+        current = node.right;
+      }
     }
-    traverse(this.root);
-    return data;
-  }
 
-  DFSInOrder() {
-    var data = [];
-    function traverse(node) {
-      node.left && traverse(node.left);
-      data.push(node.val);
-      node.right && traverse(node.right);
-    }
-    traverse(this.root);
     return data;
   }
 
@@ -97,9 +101,6 @@ tree.Insert(15);
 tree.Insert(20);
 
 console.log(tree);
-console.log("In Order", tree.DFSInOrder());
-console.log("Post Order", tree.DFSPreOrder());
-console.log("Pre Order", tree.DFSPostOrder());
-console.log("BFS", tree.BFS());
-
-//! homework => "DFS val change to indicator use loop" (and) "BFS => change to recursion"
+console.log("Pre Order Loop", tree.DFSPreOrderWithLoop());
+console.log("In Order Loop", tree.DFSInOrderWithLoop());
+console.log("BFS Loop", tree.BFSWithLoop());
