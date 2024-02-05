@@ -60,6 +60,29 @@
 // const res = SudoCode(arr);
 // console.log(res);
 
-//! [5,3,4,1,2] => [3,5,4,1,2] => [3,4,5,1,2] => [] => insertion sort
+//! [5,3,4,1,2] => [3,5,4,1,2] => [3,4,5,1,2] => [1,3,4,5,2] => [1,2,3,4,5] => insertion sort
 // ====> hometask insertion,merge,radix sort qilish and hamma otilganlarni takrorlash,
 
+//! =========== Insertion Sort ===========
+const InsertionSort = (arr) => {
+  for (let i = 1; i < arr.length; i++) {
+    let currentIdx = i;
+    while (currentIdx > 0 && arr[currentIdx] < arr[currentIdx - 1]) {
+      [arr[currentIdx], arr[currentIdx - 1]] = [
+        arr[currentIdx - 1],
+        arr[currentIdx],
+      ];
+      currentIdx--;
+    }
+  }
+  return arr;
+};
+const arr = [12, 15, 20, 5, 7, 3, 1];
+const res = InsertionSort(arr);
+console.log(res);
+
+//! ========== Merge Sort ==========
+//...
+
+//! ========= Radix Sort ==========
+//...
