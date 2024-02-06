@@ -48,26 +48,190 @@
 // const res = sumThreeValues(arr, target);
 // console.log(res);
 
-//! with patterns multiple pointers
-const sumThreeValues = (arr, target) => {
-  arr.sort((a, b) => a - b);
-  for (let i = 0; i < arr.length - 2; i++) {
-    let left = i + 1;
-    let right = arr.length - 1;
-    while (left < right) {
-      let sum = arr[left] + arr[i] + arr[right];
-      if (sum === target) {
-        return true;
-      } else if (sum < target) {
-        left++;
-      } else if (sum > target) {
-        right--;
-      }
+// ! with patterns multiple pointers
+// const sumThreeValues = (arr, target) => {
+//   arr.sort((a, b) => a - b);
+//   for (let i = 0; i < arr.length - 2; i++) {
+//     let left = i + 1;
+//     let right = arr.length - 1;
+//     while (left < right) {
+//       let sum = arr[left] + arr[i] + arr[right];
+//       if (sum === target) {
+//         return true;
+//       } else if (sum < target) {
+//         left++;
+//       } else if (sum > target) {
+//         right--;
+//       }
+//     }
+//   }
+//   return false;
+// };
+// const arr = [3, 7, 1, 5, 8, 2];
+// const target = 19;
+// const res = sumThreeValues(arr, target);
+// console.log(res);
+
+//! ==========***============= HomeWork Patterns with Two pointers ============***==========
+
+//* ================== Task 1 ===================
+
+//? Remove nth Node from End of List
+//? Statement:
+//? Given a singly linked list, remove the nth node from the end of the list and return its head.
+
+//? Linked list: 32 → 78 → 65 → 90 → 12 → 44 → NULL
+//? n = 3
+//? output:
+//? 32 -> 78 -> 65 -> 12 -> 44 -> NULL
+
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  Push(data) {
+    const node = new Node(data);
+    if (!this.head) {
+      this.head = node;
+      this.length++;
+      return this;
+    }
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = node;
+    this.length++;
+    return this;
+  }
+
+  Print() {
+    let current = this.head;
+    while (current) {
+      console.log(current.data);
+      current = current.next;
     }
   }
-  return false;
+}
+
+const RemoveNthNode = (head, num) => {
+  let newNode = new Node(0);
+  newNode.next = head;
+  let start = newNode;
+  let end = newNode;
+
+  for (let i = 0; i <= num; i++) {
+    start = start.next;
+  }
+
+  while (start !== null) {
+    start = start.next;
+    end = end.next;
+  }
+
+  end.next = end.next.next;
+  return newNode.next;
 };
-const arr = [3, 7, 1, 5, 8, 2];
-const target = 19;
-const res = sumThreeValues(arr, target);
-console.log(res);
+
+const linkedList = new LinkedList();
+
+linkedList.Push(32);
+linkedList.Push(78);
+linkedList.Push(65);
+linkedList.Push(90);
+linkedList.Push(12);
+linkedList.Push(44);
+// linkedList.Print();
+// let res = RemoveNthNode(linkedList.head, 3);
+// linkedList.Print();
+
+//* ================== Task 2 ===================
+
+//? Sort Colors
+//? Given an array, colors, which contains a combination of the following three elements:
+//? 0 (representing red)
+//? 1 (representing white)
+//? 2 (representing blue)
+//? Sort the array in place so that the elements of the same color are adjacent, with the colors in the order of red, white, and blue. The function should return the same array.
+//? Input:
+//? colors=[1,0,2,1,2,2]
+//? Output:
+//? colors=[0,1,1,2,2]
+
+//* ================== Task 3 ===================
+
+//? Reverse Words in a String
+//? Given a sentence, reverse the order of its words without affecting the order of letters within a given word.
+//? Note: The input string may contain leading or trailing spaces or multiple spaces between words. The returned string, however, should only have a single space separating each word. Do not include any extra spaces.
+//? Input:
+//? Input String = "Hello Friend"
+//? Output:
+//? Reversed String = "Friend Hello"
+
+const reverseWords = (str) => {
+  const words = str.split(" ");
+  let start = 0;
+  let end = words.length - 1;
+
+  while (start < end) {
+    const temp = words[start];
+    words[start] = words[end];
+    words[end] = temp;
+
+    start++;
+    end--;
+  }
+
+  return words.join(" ");
+};
+// console.log(reverseWords("Hello Friend"));
+
+//* ================== Task 4 ===================
+
+//? Valid Palindrome II
+//? Write a function that takes a string as input and checks whether it can be a valid palindrome by removing at most one character from it.
+//? Input:
+//? string =  "A B C E B A"
+//? output:
+//? true
+
+//* ================== Task 5 ===================
+
+//? String berilgan agar xohlagan bitta harf ni o'chirsak u palindrom bo'ladimi ?
+//? agar bo'lsa : True
+//? bo'lsa : False
+
+const isPalindromeWithOneRemove = (str) => {
+  const isPalindrome = (s, left, right) => {
+    while (left < right) {
+      if (s[left] !== s[right]) return false;
+      left++;
+      right--;
+    }
+    return true;
+  };
+
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      return (
+        isPalindrome(str, left + 1, right) || isPalindrome(str, left, right - 1)
+      );
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+// console.log(isPalindromeWithOneRemove("kiyik"));
