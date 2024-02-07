@@ -167,6 +167,30 @@ linkedList.Push(44);
 //? Output:
 //? colors=[0,1,1,2,2]
 
+const SortColors = (color) => {
+  let left = 0;
+  let right = color.length - 1;
+  let currentIdx = 0;
+
+  while (currentIdx <= right) {
+    if (color[currentIdx] === 0) {
+      [color[left], color[currentIdx]] = [color[currentIdx], color[left]];
+      left++;
+      currentIdx++;
+    } else if (color[currentIdx] === 2) {
+      [color[right], color[currentIdx]] = [color[currentIdx], color[right]];
+      right--;
+    } else {
+      currentIdx++;
+    }
+  }
+
+  return color;
+};
+
+const arr = [1, 2, 0, 1, 0, 2, 1, 1, 2, 0];
+console.log(SortColors(arr));
+
 //* ================== Task 3 ===================
 
 //? Reverse Words in a String
@@ -190,7 +214,6 @@ const reverseWords = (str) => {
     start++;
     end--;
   }
-
   return words.join(" ");
 };
 // console.log(reverseWords("Hello Friend"));
@@ -203,6 +226,37 @@ const reverseWords = (str) => {
 //? string =  "A B C E B A"
 //? output:
 //? true
+
+const isValidPalindrome = (str) => {
+  const helperIsPalindrome = (start, end) => {
+    while (start < end) {
+      if (str[start] !== str[end]) {
+        return false;
+      }
+      start++;
+      end--;
+    }
+    return true;
+  };
+
+  let start = 0;
+  let end = str.length - 1;
+
+  while (start < end) {
+    if (str[start] !== str[end]) {
+      return (
+        helperIsPalindrome(start + 1, end) || helperIsPalindrome(start, end + 1)
+      );
+    }
+    start++;
+    end--;
+  }
+
+  return true;
+};
+
+const str = "A B C E B A";
+// console.log(isValidPalindrome(str));
 
 //* ================== Task 5 ===================
 
