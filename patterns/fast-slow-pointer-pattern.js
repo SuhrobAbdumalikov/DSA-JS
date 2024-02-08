@@ -83,3 +83,10 @@ linkedList.Push(16);
 linkedList.Push(18);
 // console.log(linkedList);
 // console.log("Mid of linkedList:", FindMidLinkedList(linkedList.head));
+
+//? ===========>> HomeTask <<=============//
+//! =====> epam interview question <=====
+const foo = (arr, target) => {};
+const arr = [2, 4, 6, 3, 7];
+target = 9;
+//! circular array loop,duplicate numbers,isPalindrome
