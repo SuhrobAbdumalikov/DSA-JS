@@ -227,36 +227,36 @@ const reverseWords = (str) => {
 //? output:
 //? true
 
-// const isValidPalindrome = (str) => {
-//   const helperIsPalindrome = (start, end) => {
-//     while (start < end) {
-//       if (str[start] !== str[end]) {
-//         return false;
-//       }
-//       start++;
-//       end--;
-//     }
-//     return true;
-//   };
+const isValidPalindrome = (str) => {
+  const helperIsPalindrome = (start, end) => {
+    while (start < end) {
+      if (str[start] !== str[end]) {
+        return false;
+      }
+      start++;
+      end--;
+    }
+    return true;
+  };
 
-//   let start = 0;
-//   let end = str.length - 1;
+  let start = 0;
+  let end = str.length - 1;
 
-//   while (start < end) {
-//     if (str[start] !== str[end]) {
-//       return (
-//         helperIsPalindrome(start + 1, end) || helperIsPalindrome(start, end + 1)
-//       );
-//     }
-//     start++;
-//     end--;
-//   }
+  while (start < end) {
+    if (str[start] !== str[end]) {
+      return (
+        helperIsPalindrome(start + 1, end) || helperIsPalindrome(start, end + 1)
+      );
+    }
+    start++;
+    end--;
+  }
 
-//   return true;
-// };
+  return true;
+};
 
-// const str = "A B C E B A";
-// console.log(isValidPalindrome(str));
+const str = "A B C E B A";
+console.log(isValidPalindrome(str));
 
 //* ================== Task 5 ===================
 
@@ -265,7 +265,8 @@ const reverseWords = (str) => {
 //? bo'lsa : False
 
 const isPalindromeWithOneRemove = (str) => {
-  const isPalindrome = (s, start, right) => {
+  
+  const isPalindrome = (s, right) => {
     while (left < right) {
       if (s[left] !== s[right]) return false;
       left++;
@@ -288,7 +289,7 @@ const isPalindromeWithOneRemove = (str) => {
   }
   return true;
 };
-// console.log(isPalindromeWithOneRemove("kiyik"));
+console.log(isPalindromeWithOneRemove("kiyik"));
 
 const SortColors = (color) => {
   let start = 0;
@@ -312,4 +313,4 @@ const SortColors = (color) => {
 };
 
 const arr = [0, 1, 0, 2, 1, 2, 0, 2];
-console.log(SortColors(arr));
+// console.log(SortColors(arr));
