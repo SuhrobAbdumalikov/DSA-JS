@@ -25,7 +25,7 @@ class DoublyLinkedList {
   }
 
   Unshift(data) {
-    const newNode = new Node();
+    const newNode = new Node(data);
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
