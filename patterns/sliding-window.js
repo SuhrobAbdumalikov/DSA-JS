@@ -90,29 +90,139 @@
 // const res = Reverse(str);
 // console.log(res);
 
-const isPalindromeWithOneRemove = (str) => {
-  const isPalindrome = (s, right) => {
-    while (left < right) {
-      if (s[left] !== s[right]) return false;
-      left++;
-      right--;
-    }
-    return true;
-  };
+// const isPalindromeWithOneRemove = (str) => {
+//   const isPalindrome = (s, right) => {
+//     while (left < right) {
+//       if (s[left] !== s[right]) return false;
+//       left++;
+//       right--;
+//     }
+//     return true;
+//   };
 
-  let left = 0;
-  let right = str.length - 1;
+//   let left = 0;
+//   let right = str.length - 1;
 
-  while (left < right) {
-    if (str[left] !== str[right]) {
-      return (
-        isPalindrome(str, left + 1, right) || isPalindrome(str, left, right - 1)
-      );
-    }
-    left++;
-    right--;
-  }
-  return true;
-};
+//   while (left < right) {
+//     if (str[left] !== str[right]) {
+//       return (
+//         isPalindrome(str, left + 1, right) || isPalindrome(str, left, right - 1)
+//       );
+//     }
+//     left++;
+//     right--;
+//   }
+//   return true;
+// };
 
 // console.log(isPalindromeWithOneRemove("asil"));
+
+//!=============================================================================================================================
+// Buy and Sell Profit ====
+// const maxProfit = (prices) => {
+//   let left = 0; // Buy
+//   let right = 1; // sell
+//   let max_profit = 0;
+//   while (right <= prices.length) {
+//     if (prices[left] < prices[right]) {
+//       let profit = prices[right] - prices[left];
+
+//       max_profit = Math.max(max_profit, profit);
+//     } else {
+//       left = right;
+//     }
+//     right++;
+//   }
+//   return max_profit;
+// };
+
+// console.log(maxProfit([7, 1, 3, 4, 5, 8, 6]));
+
+// const foo = (str, k) => {
+//   let start = 0;
+//   let end = 0;
+
+//   const helperF = (s) => {
+//     let hash = {};
+//     let longest = 0;
+//     for (let i = 0; i < s.length; i++) {
+//       if (!hash[s[i]]) {
+//         hash[s[i]] = 1;
+//       } else {
+//         hash[s[i]] += 1;
+//       }
+//       longest = Math.max(longest, hash[s[i]]);
+//     }
+//     return longest;
+//   };
+
+//   let mostF = helperF(str);
+//   let window = 0;
+
+//   while (end <= str.length) {
+//     if (end - start + 1 - mostF > k) {
+//       start++;
+//       window++;
+//     } else {
+//       end++;
+//       window--;
+//     }
+//   }
+
+//   return window;
+// };
+
+// const boo = (str, k) => {
+//   let left = 0;
+//   let right = 0;
+//   let count = new Map();
+//   let res = 0;
+
+//   for (right = 0; right < str.length; right++) {
+//     let wLen = right - left + 1;
+//     count.set(str[right], 1 + count.get(str[right]) || 1);
+
+//     if (wLen - Math.max(...count.values()) > k) {
+//       left++;
+//     }
+//     wLen = right - left + 1;
+//     res = Math.max(res, wLen);
+//   }
+//   return res;
+// };
+
+// console.log(boo("aabccbb", 2));
+
+// function minWindow(str1, str2) {
+//   let sizeStr1 = str1.length;
+//   let sizeStr2 = str2.length;
+//   let minSubLen = Infinity;
+//   let indexS1 = 0;
+//   let indexS2 = 0;
+//   let minSubsequence = "";
+//   while (indexS1 < sizeStr1) {
+//     if (str1[indexS1] === str2[indexS2]) {
+//       indexS2++;
+//       if (indexS2 === sizeStr2) {
+//         let start = indexS1;
+//         let end = indexS1;
+//         indexS2--;
+//         while (indexS2 >= 0) {
+//           if (str1[start] === str2[indexS2]) {
+//             indexS2--;
+//           }
+//           start--;
+//         }
+//         start++;
+//         if (end - start + 1 < minSubLen) {
+//           minSubLen = end - start + 1;
+//           minSubsequence = str1.slice(start, end + 1);
+//         }
+//         indexS1 = start;
+//         indexS2 = 0;
+//       }
+//     }
+//     indexS1++;
+//   }
+//   return minSubsequence;
+// }
