@@ -307,3 +307,61 @@ const twoSum = function (arr, target) {
   }
   return null;
 };
+
+//! task 21 Min Stack
+
+var MinStack = function () {
+  this.items = [];
+  this.topItem = null;
+};
+
+MinStack.prototype.push = function (val) {
+  this.items.push(val);
+  this.topItem = val;
+};
+
+MinStack.prototype.pop = function () {
+  if (this.items.length > 0) {
+    this.items.pop();
+    this.topItem =
+      this.items.length > 0 ? this.items[this.items.length - 1] : null;
+  }
+};
+
+MinStack.prototype.top = function () {
+  return this.topItem;
+};
+
+MinStack.prototype.getMin = function () {
+  if (this.items.length === 0) return null;
+  let min = this.items[0];
+  for (let i = 1; i < this.items.length; i++) {
+    if (this.items[i] < min) {
+      min = this.items[i];
+    }
+  }
+  return min;
+};
+
+//! task 24 Generate Parentheses
+var generateParenthesis = function (n) {
+  const result = [];
+
+  const generate = (leftCount, rightCount, current) => {
+    if (leftCount === n && rightCount === n) {
+      result.push(current);
+      return;
+    }
+
+    if (leftCount < n) {
+      generate(leftCount + 1, rightCount, current + "(");
+    }
+
+    if (rightCount < leftCount) {
+      generate(leftCount, rightCount + 1, current + ")");
+    }
+  };
+
+  generate(0, 0, "");
+  return result;
+};
