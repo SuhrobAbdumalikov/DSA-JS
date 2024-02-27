@@ -94,17 +94,43 @@ const groupAnagrams = function (str) {
 
 //! task 5 Top K Frequency
 const topKFrequent = function (arr, k) {
-  const freqMap = new Map();
+  // const freqMap = new Map();
+  // for (const num of arr) {
+  //   freqMap.set(num, (freqMap.get(num) || 0) + 1);
+  // }
+
+  // const freqList = Array.from(freqMap.entries()).sort((a, b) => b[1] - a[1]);
+
+  // const topK = freqList.slice(0, k).map(([num]) => num);
+
+  // return topK;
+
+  const map = new Map();
+  let freqA = new Array(arr).fill().map(() => []);
+  let res = [];
+
+  console.log(freqA);
+
   for (const num of arr) {
-    freqMap.set(num, (freqMap.get(num) || 0) + 1);
+    map.set(num, (map.get(num) || 0) + 1);
   }
 
-  const freqList = Array.from(freqMap.entries()).sort((a, b) => b[1] - a[1]);
+  for (let [k, v] of map.entries()) {
+    freqA[v].push(k);
+  }
 
-  const topK = freqList.slice(0, k).map(([num]) => num);
+  for (let i = freqA.length - 1; i > 0; i--) {
+    for (let j of freqA[i]) {
+      if (res.length - 1 !== k) {
+        res.push(j);
+      }
+    }
+  }
 
-  return topK;
+  return res;
 };
+
+// console.log(topKFrequent([1, 1, 2, 3, 1]));
 
 //! task 6 Best time to buy
 const maxProfit = function (prices) {
@@ -365,3 +391,23 @@ var generateParenthesis = function (n) {
   generate(0, 0, "");
   return result;
 };
+
+//! Product of Array Except Self
+var productExceptSelf = function (nums) {
+  let newArr = new Array(nums.length).fill(1);
+
+  for (let i = 1; i < nums.length; i++) {
+    newArr[i] = newArr[i - 1] * nums[i - 1];
+  }
+
+  let p = 1;
+
+  for (let i = nums.length - 1; i >= 0; i--) {
+    newArr[i] *= p;
+    p *= nums[i];
+  }
+
+  return newArr;
+};
+
+console.log(productExceptSelf([-1, 1, 0, -3, 3]));
