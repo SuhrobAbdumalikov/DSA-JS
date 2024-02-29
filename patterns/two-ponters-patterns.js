@@ -49,28 +49,28 @@
 // console.log(res);
 
 // ! with patterns multiple pointers
-// const sumThreeValues = (arr, target) => {
-//   arr.sort((a, b) => a - b);
-//   for (let i = 0; i < arr.length - 2; i++) {
-//     let left = i + 1;
-//     let right = arr.length - 1;
-//     while (left < right) {
-//       let sum = arr[left] + arr[i] + arr[right];
-//       if (sum === target) {
-//         return true;
-//       } else if (sum < target) {
-//         left++;
-//       } else if (sum > target) {
-//         right--;
-//       }
-//     }
-//   }
-//   return false;
-// };
-// const arr = [3, 7, 1, 5, 8, 2];
-// const target = 19;
-// const res = sumThreeValues(arr, target);
-// console.log(res);
+const sumThreeValues = (arr, target) => {
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length - 2; i++) {
+    let left = i + 1;
+    let right = arr.length - 1;
+    while (left < right) {
+      let sum = arr[left] + arr[i] + arr[right];
+      if (sum === target) {
+        return true;
+      } else if (sum < target) {
+        left++;
+      } else if (sum > target) {
+        right--;
+      }
+    }
+  }
+  return false;
+};
+const arr1 = [3, 7, 1, 5, 8, 2];
+const target = 19;
+const res = sumThreeValues(arr1, target);
+console.log(res);
 
 //! ==========***============= HomeWork Patterns with Two pointers ============***==========
 
@@ -265,7 +265,6 @@ console.log(isValidPalindrome(str));
 //? bo'lsa : False
 
 const isPalindromeWithOneRemove = (str) => {
-  
   const isPalindrome = (s, right) => {
     while (left < right) {
       if (s[left] !== s[right]) return false;

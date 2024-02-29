@@ -1,4 +1,4 @@
-//! task 1 Valid Anagram
+//!  Valid Anagram
 const isAnagram = function (s, t) {
   let count = {};
 
@@ -23,7 +23,7 @@ const isAnagram = function (s, t) {
 };
 // console.log(isAnagram("acc", "cca"));
 
-//! task 2 Contain Duplicate
+//! Contain Duplicate
 const containsDuplicate = function (arrNum) {
   //   let hash = {};
   //   for (let i = 0; i < arrNum.length; i++) {
@@ -46,20 +46,20 @@ const containsDuplicate = function (arrNum) {
 };
 // console.log(containsDuplicate([1, 2, 3, 4]));
 
-//! task 3 Two Sums
-// const twoSum = function (arr, target) {
-//   for (let i = 0; i < arr.length; i++) {
-//     const num = arr[i];
-//     const complement = target - num;
-//     const complementIndex = arr.indexOf(complement, i + 1);
-//     if (complementIndex !== -1) {
-//       return [i, complementIndex];
-//     }
-//   }
-//   return null;
-// };
+//! Two Sums
+const twoSum = function (arr, target) {
+  for (let i = 0; i < arr.length; i++) {
+    const num = arr[i];
+    const complement = target - num;
+    const complementIndex = arr.indexOf(complement, i + 1);
+    if (complementIndex !== -1) {
+      return [i, complementIndex];
+    }
+  }
+  return null;
+};
 
-//! task 4 Group Anagrams
+//!  Group Anagrams
 const groupAnagrams = function (str) {
   //   let hash = {}
 
@@ -92,7 +92,7 @@ const groupAnagrams = function (str) {
   return Array.from(hash.values());
 };
 
-//! task 5 Top K Frequency
+//! Top K Frequency
 const topKFrequent = function (arr, k) {
   // const freqMap = new Map();
   // for (const num of arr) {
@@ -129,10 +129,9 @@ const topKFrequent = function (arr, k) {
 
   return res;
 };
-
 // console.log(topKFrequent([1, 1, 2, 3, 1]));
 
-//! task 6 Best time to buy
+//!  Best time to buy
 const maxProfit = function (prices) {
   let left = 0; // Buy
   let right = 1; // sell
@@ -150,7 +149,7 @@ const maxProfit = function (prices) {
   return max_profit;
 };
 
-//! task 7 Longest repeating character
+//!  Longest repeating character
 const characterReplacement = function (str, k) {
   let left = 0;
   let right = 0;
@@ -171,7 +170,7 @@ const characterReplacement = function (str, k) {
   return res;
 };
 
-//! task 8 Sliding Window Maximum
+//!  Sliding Window Maximum
 class Node {
   constructor(value) {
     this.value = value;
@@ -179,7 +178,6 @@ class Node {
     this.prev = null;
   }
 }
-
 class Deque {
   constructor() {
     this.head = null;
@@ -303,7 +301,7 @@ const maxSlidingWindow = function (arr, k) {
   return output;
 };
 
-//! task 9 Valid Parentheses
+//!  Valid Parentheses
 const isValid = function (s) {
   const stack = [];
   const mapping = { ")": "(", "}": "{", "]": "[" };
@@ -322,20 +320,7 @@ const isValid = function (s) {
   return stack.length === 0;
 };
 
-const twoSum = function (arr, target) {
-  for (let i = 0; i < arr.length; i++) {
-    const num = arr[i];
-    const complement = target - num;
-    const complementIndex = arr.indexOf(complement, i + 1);
-    if (complementIndex !== -1) {
-      return [i, complementIndex];
-    }
-  }
-  return null;
-};
-
-//! task 21 Min Stack
-
+//!  Min Stack
 var MinStack = function () {
   this.items = [];
   this.topItem = null;
@@ -369,7 +354,7 @@ MinStack.prototype.getMin = function () {
   return min;
 };
 
-//! task 24 Generate Parentheses
+//!  Generate Parentheses
 var generateParenthesis = function (n) {
   const result = [];
 
@@ -409,5 +394,131 @@ var productExceptSelf = function (nums) {
 
   return newArr;
 };
+// console.log(productExceptSelf([-1, 1, 0, -3, 3]));
 
-console.log(productExceptSelf([-1, 1, 0, -3, 3]));
+//! Longest Consecutive Sequence
+const longestConsecutive = function (nums) {
+  // const numSet = new Set(nums);
+  // let longestStreak = 0;
+
+  // for (const num of numSet) {
+  //   if (!numSet.has(num - 1)) {
+  //     let currentNum = num;
+  //     let currentStreak = 1;
+
+  //     while (numSet.has(currentNum + 1)) {
+  //       currentNum++;
+  //       currentStreak++;
+  //     }
+
+  //     longestStreak = Math.max(longestStreak, currentStreak);
+  //   }
+  // }
+
+  // return longestStreak;
+
+  //? second solve
+  if (!nums.length) return 0;
+
+  nums.sort((a, b) => a - b);
+
+  let count = 1;
+  let max = 0;
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] === nums[i - 1]) continue;
+
+    if (nums[i] === nums[i - 1] + 1) {
+      count++;
+    } else {
+      max = Math.max(max, count);
+      count = 1;
+    }
+  }
+
+  return Math.max(max, count);
+};
+
+// console.log(longestConsecutive([0, 1, 2, 3, 5, 0]));
+
+//! Valid Sudoku
+var isValidSudoku = function (board) {
+  let set = new Set();
+
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      let current = board[r][c];
+
+      if (current !== ".") {
+        let rowk = `row-${r}-${current}`;
+        let colk = `col-${c}-${current}`;
+        let boxk = `box-${Math.floor(r / 3)}-${Math.floor(c / 3)}-${current}`;
+
+        if (set.has(rowk) || set.has(colk) || set.has(boxk)) {
+          return false;
+        } else {
+          set.add(rowk);
+          set.add(colk);
+          set.add(boxk);
+        }
+      }
+    }
+  }
+  return true;
+};
+
+const arr = [
+  ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+  ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+  [".", "9", "8", ".", ".", ".", ".", "6", "."],
+  ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+  ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+  ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+  [".", "6", ".", ".", ".", ".", "2", "8", "."],
+  [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+  [".", ".", ".", ".", "8", ".", ".", "7", "9"],
+];
+// console.log(isValidSudoku(arr));
+
+//! Sliding Window Exercises ==================================//
+
+//! Valid Palindrome
+//? 1 variant
+function isPalindrome(s) {
+  s = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return s === s.split("").reverse().join("");
+}
+//? 2 variant
+function isAlphanumeric(char) {
+  return (
+    (char >= "a" && char <= "z") ||
+    (char >= "A" && char <= "Z") ||
+    (char >= "0" && char <= "9")
+  );
+}
+
+function isPalindrome(s) {
+  s = s.toLowerCase();
+
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    while (left < right && !isAlphanumeric(s[left])) {
+      left++;
+    }
+
+    while (left < right && !isAlphanumeric(s[right])) {
+      right--;
+    }
+
+    if (s[left] !== s[right]) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
+}
