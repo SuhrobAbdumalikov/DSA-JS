@@ -64,3 +64,14 @@ var insert = function (intervals, newInterval) {
   merge.push(prev);
   return merge;
 };
+
+//! Climbing Stairs 70
+var climbStairs = function (n) {
+  let arr = [1, 2];
+  for (let i = 2; i < n; i++) {
+    arr.push(arr[i - 1] + arr[i - 2]);
+  }
+  return arr[n - 1];
+};
+
+console.log(climbStairs(8));
