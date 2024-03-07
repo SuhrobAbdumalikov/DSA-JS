@@ -73,5 +73,23 @@ var climbStairs = function (n) {
   }
   return arr[n - 1];
 };
+// console.log(climbStairs(8));
 
-console.log(climbStairs(8));
+//! Meeting Rooms 920
+const MeetingRoom = (intervals) => {
+  intervals.sort(([aStart, aEnd], [bStart, bEnd]) =>
+    aStart !== bStart ? aStart - bStart : aEnd - bEnd
+  );
+
+  const prev = intervals[0];
+
+  for (let i = 1; i < intervals.length; i++) {
+    let [prevStart, prevEnd] = prev;
+    let [currentStart, currentEnd] = intervals[i];
+
+    if (prevEnd >= currentStart) {
+      return false;
+    }
+  }
+  return true;
+};
