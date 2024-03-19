@@ -590,3 +590,60 @@ var insert = function (intervals, newInterval) {
   merge.push(prev);
   return merge;
 };
+
+const fib = (n, memo = {}) => {
+  if (n in memo) {
+    return memo[n];
+  }
+  if (n <= 2) return 1;
+
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+
+  return memo[n];
+};
+
+//! Combinations
+
+// test Cases
+// canCombination([2,3], 7)
+// canCombination([5,3,4,7], 7)
+// canCombination([2,4], 7)
+// canCombination([14,7], 300)
+
+// const canCombination = (arr, target, memo = {}) => {
+//   if (target === 0) return true;
+//   if (target < 0) return false;
+//   if (target in memo) return memo[target];
+
+//   for (const num of arr) {
+//     const remainder = target - num;
+
+//     if (canCombination(arr, remainder, memo)) {
+//       memo[target] = true;
+//       return true;
+//     }
+//   }
+//   memo[target] = false;
+//   return false;
+// };
+
+// console.log(canCombination([5, 3, 4, 7], 7));
+
+//! combination Sum 4
+
+const canCombination = (arr, target, memo = {}) => {
+  if (target === 0) return 1;
+  if (target < 0) return 0;
+  if (target in memo) return memo[target];
+
+  let count = 0;
+
+  for (let num of arr) {
+    const remainder = target - num;
+    count += canCombination(arr, remainder, memo);
+  }
+  memo[target] = count;
+  return count;
+};
+
+console.log(canCombination([1, 2, 3], 4));
